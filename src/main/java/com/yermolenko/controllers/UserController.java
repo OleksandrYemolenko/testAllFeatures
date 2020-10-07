@@ -6,8 +6,8 @@ import com.yermolenko.controllers.utils.MappingValues;
 import com.yermolenko.controllers.utils.Path;
 import com.yermolenko.controllers.utils.ProjMediaType;
 import com.yermolenko.dto.UserDTO;
+import com.yermolenko.mappers.UserMapper;
 import lombok.SneakyThrows;
-import com.yermolenko.mappers.IUserMapper;
 import com.yermolenko.models.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,17 +20,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.yermolenko.services.IUserService;
+import com.yermolenko.services.UserService;
 
 @RestController
 @RequestMapping(path = Path.USER)
 public class UserController {
 
-    private final IUserService userService;
+    private final UserService userService;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserController(IUserService userService) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @SneakyThrows
@@ -39,7 +41,7 @@ public class UserController {
     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO user) {
 
         final IUser createdUser = userService.create(user);
-        final UserDTO createdUserDTO = IUserMapper.INSTANCE.toUserDTO(createdUser);
+        final UserDTO createdUserDTO = userMapper.toUserDTO(createdUser);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -52,7 +54,7 @@ public class UserController {
              produces = ProjMediaType.USER)
     public ResponseEntity<UserDTO> updateUser(@PathVariable("guid") String guid, @RequestBody @Valid UserDTO user) {
         final IUser updatedUser = userService.update(user, guid);
-        final UserDTO updatedUserDTO = IUserMapper.INSTANCE.toUserDTO(updatedUser);
+        final UserDTO updatedUserDTO = userMapper.toUserDTO(updatedUser);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -62,7 +64,7 @@ public class UserController {
     @GetMapping(value = MappingValues.GUID, produces = ProjMediaType.USER)
     public ResponseEntity<UserDTO> getUser(@PathVariable String guid) {
         final IUser currentUser = userService.getUserByGuid(guid);
-        final UserDTO currentUserDTO = IUserMapper.INSTANCE.toUserDTO(currentUser);
+        final UserDTO currentUserDTO = userMapper.toUserDTO(currentUser);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

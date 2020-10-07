@@ -6,45 +6,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.yermolenko.models.IAddress;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import com.yermolenko.models.IUser;
 
 @Entity
-@Table(name = "obj_user")
+@Table(name = "obj_address")
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements IUser, Serializable {
+public class Address implements IAddress, Serializable {
 
     @Id
-    @Column(name = "id_user")
+    @Column(name = "id_address")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idUser;
+    private int idAddress;
 
     @Column(name = "guid", nullable = false, unique = true)
     private UUID guid;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @Column(name = "address", nullable = false, unique = true)
+    private String address;
 
-    @Column(name = "name", nullable = false, unique = false)
-    private String name;
-
-    @NotNull
-    //TODO: add constraint
-    @Column(name = "phone_number", nullable = false, unique = true)
-    private String phoneNumber;
-
+    @Column(name = "details", nullable = false, unique = true)
+    private String details;
 }

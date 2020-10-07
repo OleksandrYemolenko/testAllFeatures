@@ -5,46 +5,46 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.yermolenko.models.ICategory;
+import com.yermolenko.models.IItem;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import com.yermolenko.models.IUser;
 
 @Entity
-@Table(name = "obj_user")
+@Table(name = "obj_item")
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements IUser, Serializable {
+public class Item implements IItem, Serializable {
 
     @Id
-    @Column(name = "id_user")
+    @Column(name = "id_item")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idUser;
+    private int idItem;
+
+    @ManyToOne
+    private Category category;
 
     @Column(name = "guid", nullable = false, unique = true)
     private UUID guid;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @Column(name = "details", nullable = false, unique = true)
+    private String details;
 
-    @Column(name = "name", nullable = false, unique = false)
-    private String name;
-
-    @NotNull
-    //TODO: add constraint
-    @Column(name = "phone_number", nullable = false, unique = true)
-    private String phoneNumber;
-
+    @Column(name = "image_url", nullable = false, unique = true)
+    private String imageUrl;
 }

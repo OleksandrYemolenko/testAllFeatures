@@ -1,4 +1,4 @@
-package com.yermolenko.application;
+package com.yermolenko;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"com.yermolenko.repositories"})
 @EntityScan(basePackages = {"com.yermolenko.models"})
-@ComponentScan(basePackages = {"com.yermolenko.controllers", "com.yermolenko.services"})
+@ComponentScan(basePackages = {"com.yermolenko.mappers", "com.yermolenko.controllers", "com.yermolenko.services"})
 public class AppMain {
 
     public static void main(String[] args) {

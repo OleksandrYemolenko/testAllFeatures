@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.yermolenko.models.IUser;
 
-public interface IUserService {
+public interface UserService {
 
     public IUser create(IUser user) throws Exception;
 

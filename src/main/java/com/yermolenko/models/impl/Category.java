@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -16,35 +14,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import com.yermolenko.models.IUser;
 
 @Entity
-@Table(name = "obj_user")
+@Table(name = "obj_category")
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements IUser, Serializable {
+public class Category {
 
     @Id
-    @Column(name = "id_user")
+    @Column(name = "id_category")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idUser;
+    private int idCategory;
 
     @Column(name = "guid", nullable = false, unique = true)
     private UUID guid;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @Column(name = "details", nullable = false, unique = true)
+    private String details;
 
-    @Column(name = "name", nullable = false, unique = false)
-    private String name;
-
-    @NotNull
-    //TODO: add constraint
-    @Column(name = "phone_number", nullable = false, unique = true)
-    private String phoneNumber;
-
+    @Column(name = "image_url", nullable = false, unique = true)
+    private String imageUrl;
 }

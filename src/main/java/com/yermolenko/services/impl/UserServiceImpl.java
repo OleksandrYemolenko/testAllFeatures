@@ -2,29 +2,31 @@ package com.yermolenko.services.impl;
 
 import java.util.UUID;
 
-import com.yermolenko.mappers.IUserMapper;
+import com.yermolenko.mappers.UserMapper;
 import com.yermolenko.models.IUser;
 import com.yermolenko.models.impl.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.yermolenko.repositories.IUserRepository;
-import com.yermolenko.services.IUserService;
+import com.yermolenko.services.UserService;
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
     //TODO: add logger
 
     private final IUserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(IUserRepository userRepository) {
+    public UserServiceImpl(IUserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
     public IUser create(IUser iUser) throws Exception {
         try {
-            final User user = IUserMapper.INSTANCE.toUser(iUser);
+            final User user = userMapper.toUser(iUser);
 
             user.setGuid(UUID.randomUUID());
 

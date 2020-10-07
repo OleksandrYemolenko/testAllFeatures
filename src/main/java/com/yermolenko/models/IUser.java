@@ -13,7 +13,5 @@ public interface IUser {
 
     public String getName();
 
-    public String getNickname();
-
     public String getPhoneNumber();
 }
