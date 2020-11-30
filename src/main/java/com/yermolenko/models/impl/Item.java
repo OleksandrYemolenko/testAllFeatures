@@ -5,14 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.yermolenko.models.ICategory;
 import com.yermolenko.models.IItem;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -42,8 +39,8 @@ public class Item implements IItem, Serializable {
     @Column(name = "guid", nullable = false, unique = true)
     private UUID guid;
 
-    @Column(name = "details", nullable = false, unique = true)
-    private String details;
+    @Column(name = "description", nullable = false, unique = true)
+    private String description;
 
     @Column(name = "image_url", nullable = false, unique = true)
     private String imageUrl;

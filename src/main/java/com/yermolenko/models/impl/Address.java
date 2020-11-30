@@ -38,6 +38,6 @@ public class Address implements IAddress, Serializable {
     @Column(name = "address", nullable = false, unique = true)
     private String address;
 
-    @Column(name = "details", nullable = false, unique = true)
+    @Column(name = "details", nullable = false, unique = false)
     private String details;
 }

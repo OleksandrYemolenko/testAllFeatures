@@ -4,11 +4,11 @@ import java.util.UUID;
 
 public interface IItem {
 
-    public ICategory getCategory();
+    ICategory getCategory();
 
-    public String getDetails();
+    String getDescription();
 
-    public String getImageUrl();
+    String getImageUrl();
 
-    public UUID getGuid();
+    UUID getGuid();
 }
